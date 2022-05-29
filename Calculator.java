@@ -6,28 +6,28 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
 import javax.swing.JButton;
-import javax.swing.JFrame;//jframeÃß°¡
+import javax.swing.JFrame;//jframeì¶”ê°€
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class Calculator extends JFrame {//jframeÀ» »ó¼Ó¹Ş¾Æ calculator»ı¼º
-   //jframe°´Ã¼(ÀÎ½ºÅÏ½º) »ı¼º
-   private double op1 = 0;//¹Ş´Â¼ıÀÚ
-   private double op2 = 0;//±×´ÙÀ½ ¹Ş´Â ¼ıÀÚ
-   private String operator;//±âÈ£¹Ş´Â ¹®ÀÚ¿­
+public class Calculator extends JFrame {//jframeì„ ìƒì†ë°›ì•„ calculatorìƒì„±
+   //jframeê°ì²´(ì¸ìŠ¤í„´ìŠ¤) ìƒì„±
+   private double op1 = 0;//ë°›ëŠ”ìˆ«ì
+   private double op2 = 0;//ê·¸ë‹¤ìŒ ë°›ëŠ” ìˆ«ì
+   private String operator;//ê¸°í˜¸ë°›ëŠ” ë¬¸ìì—´
    
-   Calculator(){//°è»ê±â ±â´É
-      this.setTitle("°è»ê±â");//Ã¢ÀÇ Å¸ÀÌÆ²¹ÙÀÇ ³»¿ë
-      Image picture = Toolkit.getDefaultToolkit().getImage("calculator.gif");//ÇÁ·Î±×·¥ ¾ÆÀÌÄÜÀÌ¹ÌÁö
+   Calculator(){//ê³„ì‚°ê¸° ê¸°ëŠ¥
+      this.setTitle("ê³„ì‚°ê¸°");//ì°½ì˜ íƒ€ì´í‹€ë°”ì˜ ë‚´ìš©
+      Image picture = Toolkit.getDefaultToolkit().getImage("calculator.gif");//í”„ë¡œê·¸ë¨ ì•„ì´ì½˜ì´ë¯¸ì§€
       this.setIconImage(picture);
-      this.setBounds(100,100,400,500);//¶óº§Å©±â ¼³Á¤
+      this.setBounds(100,100,400,500);//ë¼ë²¨í¬ê¸° ì„¤ì •
       this.setLayout(new BorderLayout());
       JTextField display = new JTextField("0");
-      display.setFont(new Font("±Ã¼­Ã¼", Font.BOLD, 50));//±Û¾¾Ã¼
+      display.setFont(new Font("ê¶ì„œì²´", Font.BOLD, 50));//ê¸€ì”¨ì²´
       display.setHorizontalAlignment(JTextField.RIGHT);
-      JPanel panel = new JPanel();//ÆĞ³Î Ãß°¡
-      panel.setLayout(new GridLayout(4, 4));//ÁöÁ¤µÈ ¼öÀÇ ·¹ÀÌ¾Æ¿ôÀ» °¡Áü
+      JPanel panel = new JPanel();//íŒ¨ë„ ì¶”ê°€
+      panel.setLayout(new GridLayout(4, 4));//ì§€ì •ëœ ìˆ˜ì˜ ë ˆì´ì•„ì›ƒì„ ê°€ì§
       
       for (int i = 0; i < 10; i++) {
          JButton btn = new JButton("" + i);
@@ -39,31 +39,32 @@ public class Calculator extends JFrame {//jframeÀ» »ó¼Ó¹Ş¾Æ calculator»ı¼º
                display.setText(display.getText() + btn.getText());
             }
          });
-         panel.add(btn);//¼ıÀÚ ¹öÆ°Ãß°¡
+         panel.add(btn);//ìˆ«ì ë²„íŠ¼ì¶”ê°€
       }
       
       JButton btnEqual = new JButton("=");
       btnEqual.addActionListener(e->{
-         op2 = Double.parseDouble(display.getText());//¼Ò¼öÁ¡ ¼ıÀÚ ¹Ù²ã¼­ Ç¥½Ã
-         double result = calc(op1, op2, operator);//op1, op2, ºÎÈ£ ¸Å°³º¯¼ö Àü´Ş
-         display.setText(""+ result);//result¶ó°í Ç¥½ÃÇÏ±â
-      });//ÆĞ³Î.addactionlistner->ÀÌ°É´©¸£¸é ½ÇÇàÇÒ°Í
-      panel.add(btnEqual);//°á°ú ³ªÅ¸³»±â
+         op2 = Double.parseDouble(display.getText());//ì†Œìˆ˜ì  ìˆ«ì ë°”ê¿”ì„œ í‘œì‹œ
+         double result = calc(op1, op2, operator);//op1, op2, ë¶€í˜¸ ë§¤ê°œë³€ìˆ˜ ì „ë‹¬
+         display.setText(""+ result);//resultë¼ê³  í‘œì‹œí•˜ê¸°
+      });//íŒ¨ë„.addactionlistner->ì´ê±¸ëˆ„ë¥´ë©´ ì‹¤í–‰í• ê²ƒ
+      panel.add(btnEqual);//ê²°ê³¼ ë‚˜íƒ€ë‚´ê¸°
       
+      //ê³¼ì œì¡°ê±´ì— ë§ì§€ëŠ” ì•Šì§€ë§Œ êµ¬í˜„í•˜ê³  ì‹¶ì—ˆë˜ ê¸°ëŠ¥
       JButton btncancel = new JButton("C");
       btncancel.addActionListener(e->{
-    	  display.setText("0");//Ãë¼ÒÇß±â¿¡ 0À¸·Î Ç¥½Ã
-         operator = "C";//cancelÀÌ¶ó´Â ¸Å°³º¯¼ö¸¦ c·Î Àü´Ş
+    	  display.setText("0");//ì·¨ì†Œí–ˆê¸°ì— 0ìœ¼ë¡œ í‘œì‹œ
+         operator = "C";//cancelì´ë¼ëŠ” ë§¤ê°œë³€ìˆ˜ë¥¼ cë¡œ ì „ë‹¬
       });
-      panel.add(btncancel);//°è»êÃë¼ÒÆĞ³Î Ãß°¡
+      panel.add(btncancel);//ê³„ì‚°ì·¨ì†ŒíŒ¨ë„ ì¶”ê°€
       
       JButton btnPlus = new JButton("+");
       btnPlus.addActionListener(e->{
          op1 = Double.parseDouble(display.getText());
-         display.setText("0");//0À¸·Î Ç¥½Ã
-         operator = "+";//´õÇÏ±â Àü´Ş
+         display.setText("0");//0ìœ¼ë¡œ í‘œì‹œ
+         operator = "+";//ë”í•˜ê¸° ì „ë‹¬
       });
-      panel.add(btnPlus);//´õÇÏ±âÆĞ³Î Ãß°¡
+      panel.add(btnPlus);//ë”í•˜ê¸°íŒ¨ë„ ì¶”ê°€
       
       JButton btnMinus = new JButton("-");
       btnMinus.addActionListener(e->{
@@ -71,7 +72,7 @@ public class Calculator extends JFrame {//jframeÀ» »ó¼Ó¹Ş¾Æ calculator»ı¼º
          display.setText("0");
          operator = "-";
       });
-      panel.add(btnMinus);//»©±âÆĞ³Î Ãß°¡
+      panel.add(btnMinus);//ë¹¼ê¸°íŒ¨ë„ ì¶”ê°€
       
       JButton btndivison = new JButton("/");
       btndivison.addActionListener(e->{
@@ -79,7 +80,7 @@ public class Calculator extends JFrame {//jframeÀ» »ó¼Ó¹Ş¾Æ calculator»ı¼º
          display.setText("0");
          operator = "/";
       });
-      panel.add(btndivison);//³ª´©±âÆĞ³Î Ãß°¡
+      panel.add(btndivison);//ë‚˜ëˆ„ê¸°íŒ¨ë„ ì¶”ê°€
       
       JButton btnmultiply = new JButton("*");
       btnmultiply.addActionListener(e->{
@@ -87,7 +88,7 @@ public class Calculator extends JFrame {//jframeÀ» »ó¼Ó¹Ş¾Æ calculator»ı¼º
          display.setText("0");
          operator = "*";
       });
-      panel.add(btnmultiply);//ÇÃ·¯½ºÆĞ³Î Ãß°¡
+      panel.add(btnmultiply);//í”ŒëŸ¬ìŠ¤íŒ¨ë„ ì¶”ê°€
       
       JButton btnDot = new JButton(".");
       btnDot.addActionListener(e->{
@@ -95,16 +96,16 @@ public class Calculator extends JFrame {//jframeÀ» »ó¼Ó¹Ş¾Æ calculator»ı¼º
             display.setText(display.getText()+ btnDot.getText());
          }
       });
-      panel.add(btnDot);//¼Ò¼öÁ¡ÆĞ³Î Ãß°¡
+      panel.add(btnDot);//ì†Œìˆ˜ì íŒ¨ë„ ì¶”ê°€
       
       this.add(panel);
       
-      JLabel status = new JLabel("°è»ê±â ÀÔ´Ï´Ù.");
+      JLabel status = new JLabel("ê³„ì‚°ê¸° ì…ë‹ˆë‹¤.");
       
-      this.add(BorderLayout.NORTH, display);//È­¸éÀº À§¿¡
-      this.add(BorderLayout.CENTER, panel);//¹öÆ° ÆĞ³ÎµéÀº Áß°£¿¡
-      this.add(BorderLayout.SOUTH, status);//³²ÂÊ¿¡ status Ãß°¡
-      //borderlayout.¹æÇâ
+      this.add(BorderLayout.NORTH, display);//í™”ë©´ì€ ìœ„ì—
+      this.add(BorderLayout.CENTER, panel);//ë²„íŠ¼ íŒ¨ë„ë“¤ì€ ì¤‘ê°„ì—
+      this.add(BorderLayout.SOUTH, status);//ë‚¨ìª½ì— status ì¶”ê°€
+      //borderlayout.ë°©í–¥
       
    }
    
@@ -113,25 +114,25 @@ public class Calculator extends JFrame {//jframeÀ» »ó¼Ó¹Ş¾Æ calculator»ı¼º
       switch(operator) {
       case "+":
          result = op1 + op2;
-         break;// ´õÇÏ±â±â´É
+         break;// ë”í•˜ê¸°ê¸°ëŠ¥
       case "-":
          result = op1 - op2;
-         break;// »©±â±â´É
+         break;// ë¹¼ê¸°ê¸°ëŠ¥
       case "*":
          result = op1 * op2;
-         break;// °öÇÏ±â±â´É
+         break;// ê³±í•˜ê¸°ê¸°ëŠ¥
       case "/":
          result = op1 / op2;
-         break;// ³ª´©±â±â´É
-      case "C":
+         break;// ë‚˜ëˆ„ê¸°ê¸°ëŠ¥
+      case "C"://ê³¼ì œì¡°ê±´ì— ë§ì§€ëŠ” ì•Šì§€ë§Œ êµ¬í˜„í•˜ê³  ì‹¶ì—ˆë˜ ê¸°ëŠ¥
     	 result=0;
-    	 break;//result¸¦ 0À¸·Î ¸¸µé¸é Ãë¼Ò±â´É°ú °°¾ÆÁü
+    	 break;//resultë¥¼ 0ìœ¼ë¡œ ë§Œë“¤ë©´ ì·¨ì†Œê¸°ëŠ¥ê³¼ ê°™ì•„ì§
       }
       return result;
    }
    
    public static void main(String[] args) {
-      new Calculator().setVisible(true);//Ã¢À» È­¸é¿¡ ³ªÅ¸³¿
+      new Calculator().setVisible(true);//ì°½ì„ í™”ë©´ì— ë‚˜íƒ€ëƒ„
    }
 
 }
